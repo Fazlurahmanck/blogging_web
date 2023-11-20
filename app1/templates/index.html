@@ -33,7 +33,6 @@
                     <ul>
                         <li><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="{% url 'mybloggs' %}">My Blogg</a></li>
-                        <li><a href="{% url 'blogger' %}">Bloggers</a></li>
                         <li><a href="{% url 'signup' %}">Signup</a></li>
                         <li><a href="{% url 'logging' %}">Login</a></li>
                         
@@ -73,13 +72,16 @@
                         <!-- <a href="" class="com_link" onclick="com()">Comments</a> -->
                         
                     </form>
-                    <button class="com_link" onclick="com()">Comments</button>
-                    <div class="comments_box" id="comments_box" >
+                    <button class="com_link" onclick="toggleComments('{{ post.id }}')">Comments</button>
+
+
+
+                    <div class="comments_box" id="comments_box_{{ post.id }}" >
                         {% for comment in post.comments %}
-                            <div class="com_div">
-                                <h6 class="com_name">{{ comment.user.username }}</h6>
-                                <p class="comments_box_com">{{ comment.text }}</p>
-                            </div>
+                        <div class="com_div">
+                            <h6 class="com_name">{{ comment.user.username }}</h6>
+                            <p class="comments_box_com">{{ comment.text }}</p>
+                        </div>
                         {% endfor %}
                         
                     </div>

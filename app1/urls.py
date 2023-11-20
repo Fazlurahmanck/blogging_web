@@ -6,7 +6,6 @@ urlpatterns = [
     path ('mybloggs/',views.my_bloggs,name='mybloggs'),
     path ('loging/',views.logging,name='logging'),
     path ('signup/',views.register_view,name='signup'),
-    path ('blogger/',views.blogger,name='blogger'),
     path ('newPost/',views.newPost,name='new_post'),
     path ('post_dlt/<int:id>',views.post_del,name='post_delete'),
     path ('update/<int:id>',views.Post_update,name='post_update'),

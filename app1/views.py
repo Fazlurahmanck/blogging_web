@@ -6,6 +6,7 @@ from django import forms
 from .forms import CustomUserCreationForm,CustomAuthenticationForm
 from .models import *
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -28,11 +29,7 @@ def my_bloggs(request):
     else:
         return render(request, 'my_bloggs.html')
 
-def blogger(request):
-    bloggers = {
-        'bloggers': CustomUser.objects.all()
-    }
-    return render(request, 'blogger.html', bloggers)
+
 
 def logging(request):
     if request.method == 'POST':
@@ -112,15 +109,19 @@ def Post_tp_value(request,id):
             return redirect(my_bloggs)
     return render (request,'update.html')
 
+
+@login_required
 def add_comment(request):
     if request.method == 'POST':
-
         post_id = request.POST['post_id']
         comment_text = request.POST['comment_text']
         post = Post.objects.get(id=post_id)
-        print("working..................")
+
+        
         Comment.objects.create(post=post, user=request.user, text=comment_text)
+
     return redirect(index)
+
 
 def profile (request):
     user = request.user
