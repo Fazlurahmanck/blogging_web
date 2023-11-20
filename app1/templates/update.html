@@ -1,0 +1,33 @@
+
+{% extends "index.html" %} 
+
+{% load static %}
+
+
+{%  block title %}
+New post
+{%  endblock title %}
+
+
+
+{% block condent %}
+<div class="header">
+    <div class="container">
+        
+        <div class="cols_5">
+            <form method="post" action="{% url 'post_update_value' post_up.id %}"  >
+                {% csrf_token %}
+                <input type="text" placeholder="Heading" class="post_head_wre" name="heading" value="{{post_up.title}}">
+                <label for="" class="en_post_hd">enter your Text</label>
+                <input type="text" name="content" id="" cols="30" rows="10" class="post_txt_area" value="{{post_up.content}}" ></input>
+                <input type="submit" value="post" class="post_btn">
+            </form>
+            
+         
+         
+
+        
+        </div>
+    </div>
+</div>
+{% endblock condent %}

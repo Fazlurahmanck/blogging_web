@@ -1,0 +1,36 @@
+
+{% extends "index.html" %} 
+{% load static %}
+
+
+
+
+{%  block title %}
+signup
+{%  endblock title %}
+
+
+
+{% block condent %}
+<div class="header">
+    <div class="container">
+       
+        <div class="row_2">
+            <div class="cols_4">
+                <div class="logging_col">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}} 
+                        <input type="submit" value="sign up">
+                    </form>
+                
+                </div>
+
+             
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+{% endblock condent %}

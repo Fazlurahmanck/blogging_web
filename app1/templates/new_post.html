@@ -1,0 +1,33 @@
+
+{% extends "index.html" %} 
+
+{% load static %}
+
+
+{%  block title %}
+New post
+{%  endblock title %}
+
+
+
+{% block condent %}
+<div class="header">
+    <div class="container">
+        
+        <div class="cols_5">
+            <form action="" action="{% url 'new_post' %}" method="post" >
+                {% csrf_token %}
+                <input type="text" placeholder="Heading" class="post_head_wre" name="heading">
+                <label for="" class="en_post_hd">enter your Text</label>
+                <textarea name="content" id="" cols="30" rows="10" class="post_txt_area" ></textarea>
+                <input type="submit" value="post" class="post_btn">
+            </form>
+            
+         
+         
+
+        
+        </div>
+    </div>
+</div>
+{% endblock condent %}
