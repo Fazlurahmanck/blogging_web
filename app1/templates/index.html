@@ -59,6 +59,7 @@
                     </div>
                  <h1>{{ post.title }}</h1>
                  <P>{{ post.content }}</P>
+                 <h4 style="color: red;">{{ post.sentiment }}</h4>
 
                  <div class="postfooter">
                     <form action="{% url 'add_comment' %}" method="post">

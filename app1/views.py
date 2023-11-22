@@ -7,15 +7,16 @@ from .forms import CustomUserCreationForm,CustomAuthenticationForm
 from .models import *
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from textblob import TextBlob
 
 
 def index(request):
     all_posts = Post.objects.all()
     
-    # Fetch comments for each post
+    
     comments_for_posts = {post.id: Comment.objects.filter(post=post) for post in all_posts}
     
-    # Add comments to the context
+    
     for post in all_posts:
         post.comments = comments_for_posts.get(post.id, [])
 
@@ -64,19 +65,25 @@ def newPost(request):
     if request.method == 'POST':
         title = request.POST['heading']
         content = request.POST['content']
-        print("Received POST request")
 
         if request.user.is_authenticated:
-            print("User is authenticated")
             author = request.user
-            Post.objects.create(title=title, content=content, author=author)
-            print("Post created successfully")
+            analysis = TextBlob(content)
+            sentiment = analysis.sentiment.polarity
+            
+            if sentiment >= 0.05:
+                result = "positive"
+            elif sentiment <= -0.05:
+                result = "negative"
+            else:
+                result = "neutral"
+
+            
+            Post.objects.create(title=title, content=content, author=author, sentiment=result)
             return redirect('index')
         else:
-            print("User is not authenticated")
-            return redirect('login')  # Redirect to your login view
+            return redirect('login')
     else:
-        print("Not a POST request")
         return render(request, 'new_post.html')
 
 
